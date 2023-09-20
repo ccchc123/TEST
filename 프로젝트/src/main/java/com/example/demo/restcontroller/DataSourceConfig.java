@@ -1,14 +1,8 @@
-package com.example.demo.config;
-
-import javax.sql.DataSource;
-import javax.swing.*;
+package com.example.demo.restcontroller;
 
 import com.zaxxer.hikari.HikariDataSource;
-import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 
 @Configuration
@@ -33,7 +27,7 @@ public class DataSourceConfig {
     {
         HikariDataSource dataSource = new HikariDataSource();
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/bookdb");
+        dataSource.setJdbcUrl("jdbc:mysql://localhost:3306/music");
         dataSource.setUsername("root");
         dataSource.setPassword("1234");
 

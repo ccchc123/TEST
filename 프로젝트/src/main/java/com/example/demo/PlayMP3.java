@@ -2,6 +2,8 @@ package com.example.demo;
 
 
 import javazoom.jl.player.Player;
+import org.apache.ibatis.jdbc.SQL;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -63,6 +65,11 @@ public class PlayMP3 {
     private String currentMusicName;
     private FileInputStream finalFis;
     private BufferedInputStream finalBis;
+//    private String filePath;
+
+//    @Autowired
+//    private FilePathRetrieval filePathRetrieval;
+
 
     @GetMapping("/play")
     public void playMusic(@RequestParam String name, @RequestParam String isLoop){
@@ -79,11 +86,13 @@ public class PlayMP3 {
 //            BufferedInputStream bis = new BufferedInputStream(fis);
 //            player = new Player(bis);
 
-            String filePath = "C:\\08SPING_BOOT-main\\프로젝트\\프로젝트\\노래\\2BIC(투빅)-01-그대와 나만-320k.mp3";
+            FilePathRetrieval filePathRetrieval = new FilePathRetrieval();
+            String filePath = filePathRetrieval.connect();
 
             // File 객체를 생성하여 절대 경로를 얻습니다.
             File file = new File(filePath);
             String absolutePath = file.getAbsolutePath();
+            System.out.println("FILE : " +filePath);
 
             // 절대 경로 출력
             System.out.println("절대 경로: " + absolutePath);
@@ -114,6 +123,8 @@ public class PlayMP3 {
 
         }
     }
+
+
 
     @GetMapping("/pause")
     public void pauseMusic() {
