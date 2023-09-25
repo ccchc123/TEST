@@ -172,7 +172,7 @@ body {
     <h1>음악 플레이어</h1>
     <div class="music-container" id="musicContainer">
         <div class="music-info">
-            <h4 id="title">노래 제목</h4>
+            <h4 id="title" th:text="${MusicDto.title}">노래 제목</h4>
             <div class="progress-container" id="progress-container">
                 <div class="progress" id="progress"></div>
             </div>
@@ -203,9 +203,11 @@ const nextBtn = document.getElementById("next");
 const progress = document.getElementById("progress");
 const progressContainer = document.getElementById('progress-container');
 const imgCover = document.getElementById("cover");
-const title = document.getElementById("title");
+var musicTitle = document.getElementById("title").textContent;
+const MusicDto = {
+    title: "음악제목"
+}
 
-const songs = ["hey", "summer", "ukulele"];
 
 let songIndex = 2;
 
@@ -278,13 +280,14 @@ function changeProgress(e){
 
 playBtn.addEventListener("click", () => {
     const isPlaying = musicContainer.classList.contains('play');
-    const musicFileName = "5 Seconds Of Summer-02-Want You Back-320k.mp3";
     const isLoop = true;
-
+    const MusicDto = {
+    title = "음악제목"
+    }
 
     if (isPlaying) {
 
-        fetch('/pause?name=${musicFileName}', {
+        fetch('/pause?name='+MusicDto.title, {
             method: 'GET',
         })
         .then(response => {
@@ -298,7 +301,7 @@ playBtn.addEventListener("click", () => {
             console.error('오류 발생: ' + error);
         });
     } else {
-        fetch('/play?name=${musicFileName}&isLoop=${isLoop}', {
+        fetch('/play?name='+MusicDto.title'&isLoop=${isLoop}', {
             method: 'GET',
         })
         .then(response => {

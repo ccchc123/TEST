@@ -14,10 +14,5 @@ public class ProductController {
 	public void sing(){
 		System.out.println("singasong");
 	}
-	@GetMapping("/add")
-	public void productAdd()
-	{
-		log.info("GET /product/add");
-	}
 
 }
